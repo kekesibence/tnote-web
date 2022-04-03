@@ -27,6 +27,8 @@
 
 <script>
 import { ref } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
@@ -34,8 +36,14 @@ export default {
     const email = ref('')
     const password = ref('')
 
-    const submit = () => {
+    const router = useRouter()
+
+    const submit = async (e) => {
       console.log(name.value, email.value, password.value)
+      const form = new FormData(e.target);
+      const inputs = Object.fromEntries(form.entries());
+      await axios.post("register", inputs);
+      await router.push("/login");
     }
     
     return { submit, name, email, password }

@@ -22,16 +22,25 @@
 
 <script>
 import { ref } from 'vue'
+import axios from 'axios'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
     const email = ref('')
     const password = ref('')
 
-    const submit = () => {
-      console.log( email.value, password.value)
-    }
-    
+    const router = useRouter();
+    const submit = async (e) => {
+      const form = new FormData(e.target);
+      const inputs = Object.fromEntries(form.entries());
+      const { data } = await axios.post("login", inputs, {
+        withCredentials: true,
+      });
+      axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+      await router.push("/");
+    };
+
     return { submit, email, password }
   }
 }
