@@ -1,6 +1,7 @@
  <template>
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
    <div class="collapse navbar-collapse" id="navbarNav">
+     <h1 id="navcim">TNote</h1>
     <div>
       <ul class="navbar-nav">
       <li class="nav-item p-3">
@@ -37,3 +38,10 @@ export default {
   components: { }
 }
 </script>
+
+<style scoped>
+#navcim {
+  padding-left: 2%;
+  font-weight: bold;
+}
+</style>

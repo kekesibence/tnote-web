@@ -20,6 +20,7 @@
         </div>
 
         <button class="btn btn-danger">Submit</button>
+        <p v-if="error"> {{ error }} </p>
       </form>
     </main>
   </div>
@@ -27,26 +28,33 @@
 
 <script>
 import { ref } from 'vue'
-import axios from 'axios'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default {
   setup() {
     const name = ref('')
     const email = ref('')
     const password = ref('')
+    const error = ref(null);
 
     const router = useRouter()
+    const store = useStore()
 
-    const submit = async (e) => {
-      console.log(name.value, email.value, password.value)
-      const form = new FormData(e.target);
-      const inputs = Object.fromEntries(form.entries());
-      await axios.post("register", inputs);
-      await router.push("/login");
+    const submit = async(e) => {
+      try {
+        await store.dispatch('register', {
+          name: name.value,
+          email: email.value,
+          password: password.value
+        })
+        router.push('/')
+      } catch(err) {
+        error.value = err.value
+      }
+      
     }
-    
-    return { submit, name, email, password }
+    return { submit, name, email, password, error }
   }
 }
 </script>
