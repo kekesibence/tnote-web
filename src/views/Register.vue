@@ -1,6 +1,6 @@
 <template>
-   <div class="container justify-content-center w-25">
-    <main class="form-login">
+   <div class="container justify-content-center ml-1">
+    <main class="form-login p-5">
       <form @submit.prevent="submit">
         <h1>Sign up</h1>
 

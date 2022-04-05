@@ -1,8 +1,6 @@
 <template>
-    <div class="main">
-    </div>
-    <div>
-        <router-view/>
+    <div class="main mt-5">
+        <router-view class="border"/>
     </div>
 </template>
 <script>

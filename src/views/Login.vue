@@ -1,5 +1,5 @@
 <template>
-   <div class="container justify-content-center w-25">
+   <div class="container justify-content-center w-25 p-4">
     <main class="form-singin ">
       <form @submit.prevent="submit">
         <h1>Log in</h1>
@@ -15,7 +15,7 @@
         </div>
 
         <button class="btn btn-danger">Submit</button>
-        <p v-if="error"> {{ error }} </p>
+        <p v-if="error == true">Hiba</p>
       </form>
     </main>
   </div>
@@ -27,10 +27,12 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 export default {
+  name: "Login",
+  components: {},
   setup() {
     const email = ref('')
     const password = ref('')
-    const error = ref(null);
+    let error = false
 
     const router = useRouter()
     const store = useStore()
@@ -42,11 +44,12 @@ export default {
           password: password.value
         })
         router.push('/')
-      } catch(err) {
-        error.value = err.value
+      } catch(er) {
+        error = true
+        console.log(error)
       }
     }
-    return { submit, email, password , error}
-  }
+    return { submit, email, password, error}
+  },
 }
 </script>
