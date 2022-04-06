@@ -15,7 +15,7 @@
         </div>
 
         <button class="btn btn-danger">Submit</button>
-        <p v-if="error == true">Hiba</p>
+        <p v-if="error">Hiba</p>
       </form>
     </main>
   </div>
@@ -27,12 +27,36 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 export default {
-  name: "Login",
+  /*name: "Login",
   components: {},
   setup() {
     const email = ref('')
     const password = ref('')
-    let error = false
+    //let error = false
+    const error = ref(null);
+
+
+    const router = useRouter()
+    const store = useStore()
+
+    const submit = async(e) => {
+      try {
+        await store.dispatch('login', {
+          email: email.value,
+          password: password.value
+        })
+        console.log('router elott')
+        router.push('/')
+      } catch(er) {
+        error.value = err.value
+      }
+    }
+    return { submit, email, password, error}
+  },*/
+   setup() {
+    const email = ref('')
+    const password = ref('')
+    const error = ref(null);
 
     const router = useRouter()
     const store = useStore()
@@ -44,12 +68,12 @@ export default {
           password: password.value
         })
         router.push('/')
-      } catch(er) {
-        error = true
-        console.log(error)
+      } catch(err) {
+        error.value = err.value
       }
+      
     }
-    return { submit, email, password, error}
-  },
+    return { submit, email, password, error }
+  }
 }
 </script>

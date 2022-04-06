@@ -28,11 +28,11 @@ const store = createStore({
     },
     async login(context, { email, password } ) {
       console.log('login')
-      const { data } = await axios.post("login", { email, password}, { withCredentials: true, });
+      const { data } = await axios.post("login", { email, password }, { withCredentials: true, });
       axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
       console.log(data)
       if(data) {
-        context.commit('setUser', data.user.proxy.user)
+        context.commit('setUser', data.user)
       }
     },
     async logout(context) {
