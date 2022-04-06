@@ -6,7 +6,7 @@ import NoteView from '../views/Notes/NoteView.vue'
 import Notes from '../views/Notes/Notes.vue'
 import NoteEdit from '../views/Notes/NoteEdit.vue'
 import NoteAdd from '../views/Notes/NoteAdd.vue'
-
+import User from '../views/User/User.vue'
 
 
 
@@ -45,7 +45,13 @@ const routes = [
     path: '/noteedit',
     name: 'noteedit',
     component: NoteEdit
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: User
   }
+
 ]
 
 const router = createRouter({
