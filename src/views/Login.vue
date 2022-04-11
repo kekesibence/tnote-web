@@ -27,32 +27,6 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 export default {
-  /*name: "Login",
-  components: {},
-  setup() {
-    const email = ref('')
-    const password = ref('')
-    //let error = false
-    const error = ref(null);
-
-
-    const router = useRouter()
-    const store = useStore()
-
-    const submit = async(e) => {
-      try {
-        await store.dispatch('login', {
-          email: email.value,
-          password: password.value
-        })
-        console.log('router elott')
-        router.push('/')
-      } catch(er) {
-        error.value = err.value
-      }
-    }
-    return { submit, email, password, error}
-  },*/
    setup() {
     const email = ref('')
     const password = ref('')

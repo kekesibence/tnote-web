@@ -17,6 +17,16 @@ router-link {
     border-radius: 25px;
 }
 
+.card-title {
+    background-color: #FF6C00;
+    border: 2px solid #FF6C00;
+    border-radius: 25px;
+}
+
+.card-body {
+    padding: 0%;
+}
+
 .submitBtn {
     background-color: #FF6C00;
     color: white;
@@ -30,7 +40,14 @@ router-link {
     width: 50%;
 }
 
+.card{
+    background-color:#1F082F;
+    color: white;
+    border: 2px solid #1F082F;
+    border-radius: 25px;
+    margin: 1%;
 
+}
 
 #navbar-logo {
     width: 15%;

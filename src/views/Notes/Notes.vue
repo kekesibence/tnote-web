@@ -1,23 +1,25 @@
 <template>
     <div class="notes" v-if="isLoggedIn">
-        <h2>You can see all of your notes here..</h2>
-        <div class="px-5">
-            <div class="card" style="width: 18rem;">
+        <h2>You can see all of your notes here..</h2> 
+    <div class="row px-5" v-for="rowIndex in Math.ceil(notes.length / 3)" v-bind:key="rowIndex.id">
+            <div class="card col-sm-3" v-for="note in notes.slice(3 * (rowIndex - 1), 3 * rowIndex)" v-bind:key="note.id">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <router-link style="text-decoration: none; color: inherit;" to="/noteview">View note</router-link>
+                    <div class="card-title"><h6>{{ note.title }}</h6></div>
+                    <p class="card-subtitle">{{ note.content }}</p>
+                    <router-link  class="card-footer" style="text-decoration: none; color: inherit;" to="/noteview"> 
+                        <p>Updated at: {{ note.updated_at }}</p>
+                    </router-link>
                 </div>
             </div>
         </div>
         <router-link style="text-decoration: none; color: inherit;" to="/noteadd">Add new Note</router-link>
-    </div>
-
+    </div> 
     <div v-else>
         <h2>Please log in before checking your notes</h2>
-    </div>
+    </div>    
 </template>
+
+      <!--  -->
 <script>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -29,10 +31,12 @@ export default {
   setup() {
     const store = useStore();
     const router = useRouter();
-
+     
     return {
       user: computed(() => store.getters.getUser),
       isLoggedIn: computed(() => store.getters.isAuthenticated),
+      getnotes: store.dispatch('getNotes'),
+      notes: computed(() => store.getters.getNoteList)
     };
   },
 };
