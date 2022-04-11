@@ -1,25 +1,25 @@
 <template>
-   <div class="container justify-content-center ml-1">
-    <main class="form-login p-5">
+   <div class="container justify-content-center formok">
+    <main class="form-login">
       <form @submit.prevent="submit">
-        <h1>Sign up</h1>
+        <h1>register</h1>
 
         <div class="form-group row">
-          <input name="name" type="name" placeholder="Example Name" v-model="name" required/>
+          <input class="input" name="name" type="name" placeholder="Example Name" v-model="name" required/>
           <label>Name</label>
         </div>
 
         <div class="form-group row">
-          <input type="email" name="email" placeholder="example@test.com" v-model="email" required/>
+          <input class="input"  type="email" name="email" placeholder="example@test.com" v-model="email" required/>
           <label>E-mail</label>
         </div>
 
         <div class="form-group row">
-          <input type="password" name="password" placeholder="Password" v-model="password" required/>
+          <input class="input"  type="password" name="password" placeholder="Password" v-model="password" required/>
           <label>Password</label>
         </div>
 
-        <button class="btn btn-danger">Submit</button>
+        <button class="submitBtn">Submit</button>
         <p v-if="error"> {{ error }} </p>
       </form>
     </main>

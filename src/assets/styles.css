@@ -1,0 +1,97 @@
+body {
+    background-color: #412174;
+    color: white;
+    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+}
+router-link {
+    text-decoration: none;
+}
+
+.input {
+    color: lightgray;
+    font-family: Arial, Helvetica, sans-serif;  
+    border: 2px solid #1F082F;
+    border-radius: 25px;
+}
+
+.submitBtn {
+    background-color: #FF6C00;
+    color: white;
+    border: none;
+    padding: 2%;
+    border-radius: 10%;
+}
+
+.formok {
+    padding: 5%;
+    width: 50%;
+}
+
+
+
+#navbar-logo {
+    width: 15%;
+    height: 15%;
+    align-self: left;
+}
+
+#profileBtn {
+    border: none;
+    background-color: #1F082F;
+    color: white;
+    font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+#profileBtn:hover {
+    color:#FF6C00 
+}
+
+#dropdown-logo {
+    width: 15%;
+    height: 15%;
+    align-self: left;
+}
+
+.navbar-toggler {
+    width: fit-content;
+}
+
+.navbar-custom {
+    background-color: #1F082F;
+}
+
+
+.navbar-custom .navbar-nav .nav-link {
+    color: white;
+}
+
+/* change the color of active or hovered links */
+.navbar-custom .nav-item:active .nav-link,
+.navbar-custom .nav-item:focus .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #FF6C00;
+}
+
+/* for dropdowns only */
+.navbar-custom .navbar-nav .dropdown-menu {
+    background-color: #1F082F;
+    color: white;
+}
+
+/* dropdown item text color */
+.navbar-custom .navbar-nav .dropdown-item {
+    color: white;
+}
+
+/* dropdown item hover or focus */
+.navbar-custom .navbar-nav .dropdown-item:hover,
+.navbar-custom .navbar-nav .dropdown-item:focus,
+.navbar-custom .navbar-nav .dropdown-item:active {
+    color: #FF6C00;
+    background-color: #1F082F;
+}

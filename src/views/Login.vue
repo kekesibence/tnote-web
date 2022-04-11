@@ -1,20 +1,20 @@
 <template>
-   <div class="container justify-content-center w-25 p-4">
+   <div class="container justify-content-center formok">
     <main class="form-singin ">
       <form @submit.prevent="submit">
-        <h1>Log in</h1>
+        <h1>login</h1>
 
         <div class="form-group row">
-          <input type="email" name="email" placeholder="example@test.com" v-model="email" required/>
-          <label>E-mail</label>
+          <input class="input"  type="email" name="email" placeholder="example@test.com" v-model="email" required/>
+          <label>e-mail</label>
         </div>
 
         <div class="form-group row">
-          <input type="password" name="password" placeholder="Password"  v-model="password" required/>
-          <label>Password</label>
+          <input class="input"  type="password" name="password" placeholder="password"  v-model="password" required/>
+          <label>password</label>
         </div>
 
-        <button class="btn btn-danger">Submit</button>
+        <button class="submitBtn">submit</button>
         <p v-if="error">Hiba</p>
       </form>
     </main>

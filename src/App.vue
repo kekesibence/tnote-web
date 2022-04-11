@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <router-view />
+  <router-view class="pt-5" />
 </template>
 
 <script>
@@ -15,14 +15,5 @@ export default {
 
 </script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-router-link {
-  text-decoration: none;
-}
+
 </style>
