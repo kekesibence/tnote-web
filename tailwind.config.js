@@ -1,4 +1,13 @@
 module.exports = {
+  variants: {
+    extend: {
+      backgroundColor: ['active'],
+      // ...
+      border: ['focus-visible', 'first'],
+      // ...
+      textColor: ['visited'],
+    }
+  },
   content: [
   "./index.html",
   "./src/**/*.{vue,js,ts,jsx,tsx}",

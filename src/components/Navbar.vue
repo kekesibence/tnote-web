@@ -1,131 +1,85 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-custom" v-if="isLoggedIn">
-    
-    <div class="collapse navbar-collapse w-100" >
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/notes">notes</router-link>
-        </li>
-      </ul>
-    </div>
-
-    <div class="collapse navbar-collapse w-100" id="collapsibleNavbar">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/notes">notes</router-link>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img class="dropdown-logo" src="../assets/profil.png" />
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right">
-              <router-link to="/login" class="dropdown-item">
-                <button @click="logoutClick" id="profileBtn">logout</button></router-link>
-              <div class="dropdown-divider"></div>
-              <router-link to="/user" class="dropdown-item">
-                {{ user.name }}
-              </router-link>
+    <header class="bg-darkPurple sm:flex mt-0 fixed w-full z-10 top-0 sm:items-center sm:px-4 sm:py-0" v-if="!isLoggedIn">
+        <div class="flex items-center justify-between px-4 py-3 sm:p-0">
+            <div>
+                <img class="h-14" src="../assets/tnote_logo_complete.png" alt="tnote-logo">
             </div>
-          </li>
-      </ul>
-    </div>
-
-    
-
-    <div class="mx-auto order-0">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <img class="navbar-menu" src="../assets/menu.png" />
-      </button>
-    </div>
-
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img class="dropdown-logo" src="../assets/profil.png" />
-            </a>
-
-            <div class="dropdown-menu dropdown-menu-right">
-              <router-link to="/login" class="dropdown-item">
-                <button @click="logoutClick" id="profileBtn">logout</button></router-link>
-              <div class="dropdown-divider"></div>
-              <router-link to="/user" class="dropdown-item">
-                {{ user.name }}
-              </router-link>
+            <div class="sm:hidden border">
+                <button type="button" @click="isOpen = !isOpen">
+                    <img src="../assets/menu.png" alt="Menu logo" viewBox="0 0 24 24" class="h-10 w-10"> 
+                </button>
             </div>
-          </li>
-        </ul>
-      </div>
-  </nav>
+        </div>
+        <nav :class="isOpen ? 'block' : 'hidden'" class="px-4 pt-1 pb-1 sm:flex">
+            <router-link class="block py-1 font-semibold hover:text-orange hover:no-underline sm:mr-4" to="/register">Register</router-link>
+            <router-link class="block py-1 font-semibold hover:text-orange hover:no-underline sm:mr-4" to="/login">Login</router-link>
+            <router-link class="block py-1 font-semibold hover:text-orange hover:no-underline sm:mr-4" to="">About us</router-link>
+        </nav>
+    </header>
 
-  
-  <nav class="navbar navbar-expand-md navbar-custom" v-else>
-    <div class="collapse navbar-collapse w-100" id="collapsibleNavbar">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">home</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/login">login</router-link>
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/register">register</router-link>
-        </li>
-      </ul>
-    </div>
-    <div class="mx-auto order-0">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavbar"
-      >
-        <img class="navbar-menu" src="../assets/menu.png" />
-      </button>
-    </div>
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <router-link class="nav-link" to="/about">about us</router-link>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    <!---------------------------------------------------------------------------------------->
+    <header class="bg-darkPurple sm:flex mt-0 fixed w-full z-10 top-0 sm:items-center sm:px-4 sm:py-0" v-if="isLoggedIn">
+        <div class="flex items-center justify-between px-4 py-3 sm:p-0">
+            <div>
+                <img class="h-14" src="../assets/tnote_logo_complete.png" alt="tnote-logo">
+            </div>
+            <div class="sm:hidden border">
+                <button type="button" @click="isOpen = !isOpen">
+                    <img src="../assets/menu.png" alt="Menu logo" viewBox="0 0 24 24" class="h-10 w-10"> 
+                </button>
+            </div>
+        </div>
+
+        <nav :class="isOpen ? 'block' : 'hidden'" class="sm:block">
+            <div class="px-2 py-2 sm:flex sm:p-0">
+                <router-link class="block px-2 py-1 font-semibold hover:text-orange hover:no-underline sm:mr-4" to="/notes">Notes</router-link>
+                <router-link class="block px-2 py-1 font-semibold hover:text-orange hover:no-underline sm:mr-4" to="/timetable">Timetable</router-link>
+                <router-link class="block px-2 py-1 font-semibold hover:text-orange hover:no-underline sm:mr-4" to="/">About us</router-link> 
+                <ProfileDropdown class="hidden sm:block"/>
+            </div>
+            <div class="px-3 py-2 border-t border-gray-600 sm:hidden"> 
+                <div class="flex items-center">
+                    <router-link class="font-semibold hover:text-orange hover:no-underline" to="/">{{ user.name }}</router-link>
+                </div>
+                <div class="mt-1" >
+                    <router-link class="block text-white-600 py-1 hover:text-orange hover:no-underline text-sm"  to="/">Contact support</router-link>
+                    <button  class="block text-white-600 py-1  hover:text-orange hover:no-underline text-sm	" @click="logoutClick">Logout</button>
+                </div>
+            </div>
+        </nav>
+    </header>
 </template>
 
 <script>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { computed } from "vue";
+import ProfileDropdown from "./ProfileDropdown.vue"
 
-export default {
-  name: "Navbar",
-  components: {},
-  setup() {
-    const store = useStore();
-    const router = useRouter();
+export default ({
+    components: {
+        ProfileDropdown,
+    },
+    setup() {
+        const store = useStore();
+        const router = useRouter();
 
-    const logoutClick = () => {
-      store.dispatch("logout");
-      console.log("logout");
-      router.push("/login");
-    };
+        const logoutClick = () => {
+        store.dispatch("logout");
+        console.log("logout");
+        router.push("/login");
+        };
 
-    return {
-      logoutClick,
-      user: computed(() => store.getters.getUser),
-      isLoggedIn: computed(() => store.getters.isAuthenticated),
-    };
-  },
-};
+        return {
+        logoutClick,
+        user: computed(() => store.getters.getUser),
+        isLoggedIn: computed(() => store.getters.isAuthenticated),
+        };
+    },
+    data() {
+        return {
+            isOpen: true,
+        }
+    },
+})
 </script>
-
-<style >
-</style>

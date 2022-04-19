@@ -7,8 +7,7 @@ import Notes from '../views/Notes/Notes.vue'
 import NoteEdit from '../views/Notes/NoteEdit.vue'
 import NoteAdd from '../views/Notes/NoteAdd.vue'
 import User from '../views/User/User.vue'
-
-
+import Timetable from '../views/Timetable/Timetable.vue'
 
 const routes = [
   {
@@ -50,6 +49,11 @@ const routes = [
     path: '/user',
     name: 'user',
     component: User
+  },
+  {
+    path: '/timetable',
+    name: 'user',
+    component: Timetable
   }
 
 ]
