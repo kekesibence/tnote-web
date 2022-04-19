@@ -1,5 +1,6 @@
 <template>
-<h1 class="flex justify-center font-semibold text-2xl mt-5 mb-2">Login</h1>
+<div>
+<h1 class="flex justify-center pt-16 text-xl w-full font-bold">Login</h1>
   <div class="w-7/12 mx-auto -">
   <div class="shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border-1 border-black/50 mt-4">
     <main class="form-login">
@@ -27,6 +28,7 @@
     </form>
     </main>
   </div>
+</div>
 </div>
 </template>
 

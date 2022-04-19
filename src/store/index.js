@@ -14,30 +14,28 @@ const store = createStore({
       title: null,
       updated_at: null,
     },
-    isAuthenticated: false
+    isAuthenticated: false,
+    activeNote: null
   },
   mutations: {
     setUser(state, payload) {
-      state.user = payload,
-      console.log("User state change:", state.user)
+      state.user = payload
     },
     setToken(state, payload) {
-      state.token = payload,
-      console.log("Token state changed:", state.token)
+      state.token = payload
     },
     setIsAuthenticated(state, payload) {
       state.isLoggedIn = payload
-      console.log("Logged In or Out")    
     },
     fillNoteList(state, payload) {
       state.noteList = payload
-      console.log("Notes fill")
-      console.log(state.noteList)
+    },
+    setActiveNote(state, payload) {
+      state.activeNote = payload
     }
   },
   actions: {
     async register(context, { name, email, password } ) {
-        console.log('register')
 
         const { data } = await axios.post("register", { name, email, password });
         if(data) {
@@ -45,7 +43,6 @@ const store = createStore({
         }
     },
     async login(context, { email, password } ) {
-      console.log('login')
       const { data } = await axios.post("login", { email, password }, { withCredentials: true, });
       axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
       console.log(data.user)
@@ -55,7 +52,6 @@ const store = createStore({
       }
     },
     async logout(context) {
-      console.log('logout')
 
       const user = null;
       const token = null;
@@ -63,17 +59,35 @@ const store = createStore({
       context.commit("setToken", token)
     },
     async getNotes(context) {
-      console.log('notes');
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
-      const response  = await axios.get('users/1/notes')
+      const response  = await axios.get(`users/${this.getters.getUser.id}/notes`)
       context.commit("fillNoteList", response.data)
+    },
+    async addNote(context, {title, content, ownerId }) {
+      console.log('addNote');
+      console.log(content, ownerId, title)
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      await axios.post('notes', { content, ownerId, title}, {withCredentials: true, });
+    },
+    async setActiveNote(context, note) {
+      context.commit("setActiveNote", note)
+    },
+    async editNote(context, {title, ownerId, content }){
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      await axios.patch(`notes/${this.getters.getActiveNote.id}`, { content, ownerId, title}, {withCredentials: true, });
+      context.commit("setActiveNote", null)
+    },
+    async deleteNote(context, id) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      await axios.delete(`notes/${id}`, {withCredentials: true, });
     }
   },
   getters: {
     isAuthenticated: state => !!state.user,
     getUser: (state) => state.user,
     getToken: (state) => state.token,
-    getNoteList: (state) => state.noteList
+    getNoteList: (state) => state.noteList,
+    getActiveNote: (state) => state.activeNote
   }
 })
 

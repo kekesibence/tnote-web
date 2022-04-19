@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-darkPurple sm:flex sm:items-center sm:px-4 sm:py-0" v-if="!isLoggedIn">
+    <header class="bg-darkPurple sm:flex mt-0 fixed w-full z-10 top-0 sm:items-center sm:px-4 sm:py-0" v-if="!isLoggedIn">
         <div class="flex items-center justify-between px-4 py-3 sm:p-0">
             <div>
                 <img class="h-14" src="../assets/tnote_logo_complete.png" alt="tnote-logo">
@@ -18,7 +18,7 @@
     </header>
 
     <!---------------------------------------------------------------------------------------->
-    <header class="bg-darkPurple sm:flex sm:items-center sm:px-4 sm:py-0" v-if="isLoggedIn">
+    <header class="bg-darkPurple sm:flex mt-0 fixed w-full z-10 top-0 sm:items-center sm:px-4 sm:py-0" v-if="isLoggedIn">
         <div class="flex items-center justify-between px-4 py-3 sm:p-0">
             <div>
                 <img class="h-14" src="../assets/tnote_logo_complete.png" alt="tnote-logo">
