@@ -6,6 +6,7 @@ import './interceptors/axios'
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"   
 import "./assets/styles.css"
+import './index.css'
 
 
 createApp(App).use(store).use(router).mount('#app')

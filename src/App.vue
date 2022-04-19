@@ -1,15 +1,17 @@
 <template>
-  <Navbar />
-  <router-view class="pt-5" />
+  <div id="app" class="bg-lightPurple">
+    <NavbarTeszt/>
+    <router-view class="flex items-center justify-center"/>
+  </div>
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+import NavbarTeszt from '@/components/NavbarTeszt.vue'
 
 
 export default {
   components: {
-    Navbar
+    NavbarTeszt
   }
 }
 

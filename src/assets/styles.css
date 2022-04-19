@@ -1,3 +1,7 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
     background-color: #412174;
     color: white;
@@ -87,28 +91,24 @@ router-link {
     color: white;
 }
 
-/* change the color of active or hovered links */
 .navbar-custom .nav-item:active .nav-link,
 .navbar-custom .nav-item:focus .nav-link,
 .navbar-custom .nav-item:hover .nav-link {
     color: #FF6C00;
 }
 
-/* for dropdowns only */
 .navbar-custom .navbar-nav .dropdown-menu {
     background-color: #1F082F;
     color: white;
 }
 
-/* dropdown item text color */
 .navbar-custom .navbar-nav .dropdown-item {
     color: white;
 }
 
-/* dropdown item hover or focus */
 .navbar-custom .navbar-nav .dropdown-item:hover,
 .navbar-custom .navbar-nav .dropdown-item:focus,
 .navbar-custom .navbar-nav .dropdown-item:active {
     color: #FF6C00;
     background-color: #1F082F;
-}
+} */ 

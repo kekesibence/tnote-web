@@ -12,7 +12,7 @@ const store = createStore({
       content: null,
       ownerId: null,
       title: null,
-      updatedAt: null,
+      updated_at: null,
     },
     isAuthenticated: false
   },

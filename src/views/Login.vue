@@ -1,24 +1,33 @@
 <template>
-   <div class="container justify-content-center formok">
-    <main class="form-singin ">
-      <form @submit.prevent="submit">
-        <h1>login</h1>
+<h1 class="flex justify-center font-semibold text-2xl mt-5 mb-2">Login</h1>
+  <div class="w-7/12 mx-auto -">
+  <div class="shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border-1 border-black/50 mt-4">
+    <main class="form-login">
+    <form @submit.prevent="submit">
+      <div class="mb-4">
+        <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="email">
+          E-mail address
+        </label>
+        <input class="input shadow appearance-none border rounded-full w-full py-2 px-3 text-black"  type="text" placeholder="example@mail.com" v-model="email" required>
+      </div>
 
-        <div class="form-group row">
-          <input class="input"  type="email" name="email" placeholder="example@test.com" v-model="email" required/>
-          <label>e-mail</label>
-        </div>
+      <div class="mb-4">
+        <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="password">
+          Password
+        </label>
+        <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 black mb-3"  type="password" placeholder="***********" v-model="password" required>
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="submitBtn bg-orange font-bold rounded text-white  py-2 px-4">Submit</button>
 
-        <div class="form-group row">
-          <input class="input"  type="password" name="password" placeholder="password"  v-model="password" required/>
-          <label>password</label>
-        </div>
-
-        <button class="submitBtn">submit</button>
-        <p v-if="error">Hiba</p>
-      </form>
+        <router-link to="" class="inline-block align-baseline font-semibold hover:text-orange hover:no-underline text-sm" >
+          Forgot Password?
+        </router-link>
+      </div>
+    </form>
     </main>
   </div>
+</div>
 </template>
 
 <script>

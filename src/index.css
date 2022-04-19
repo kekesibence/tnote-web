@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background-color: #412174;
+    color: white;
+    font-family: 'Arial', 'Arial', Gadget, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+router-link {
+    text-decoration: none;
+}
