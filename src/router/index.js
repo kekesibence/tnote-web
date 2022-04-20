@@ -8,6 +8,10 @@ import NoteEdit from '../views/Notes/NoteEdit.vue'
 import NoteAdd from '../views/Notes/NoteAdd.vue'
 import User from '../views/User/User.vue'
 import Timetable from '../views/Timetable/Timetable.vue'
+import TimetableView from '../views/Timetable/TimetableView.vue'
+import TimetableElementAdd from '../views/TimetableElements/TimetableElementAdd.vue'
+import TimetableElementEdit from '../views/TimetableElements/TimetableElementEdit.vue'
+
 
 const routes = [
   {
@@ -54,7 +58,22 @@ const routes = [
     path: '/timetable',
     name: 'user',
     component: Timetable
-  }
+  },
+  {
+    path: '/timetableview',
+    name: 'timetableview',
+    component: TimetableView
+  },
+  {
+    path: '/timetableelementadd',
+    name: 'timetableelementadd',
+    component: TimetableElementAdd
+  },
+  {
+    path: '/timetableelementedit',
+    name: 'timetableelementedit',
+    component: TimetableElementEdit
+  },
 
 ]
 

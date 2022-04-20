@@ -36,7 +36,6 @@ export default {
     return {
       user: computed(() => store.getters.getUser),
       isLoggedIn: computed(() => store.getters.isAuthenticated),
-      getnotes: store.dispatch('getNotes'),
       notes: computed(() => store.getters.getNoteList)
     };
   },

@@ -16,7 +16,7 @@
         <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="password">
           Password
         </label>
-        <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 black mb-3"  type="password" placeholder="***********" v-model="password" required>
+        <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 text-black mb-3"  type="password" placeholder="***********" v-model="password" required>
       </div>
       <div class="flex items-center justify-between">
         <button class="submitBtn bg-orange font-bold rounded text-white  py-2 px-4">Submit</button>

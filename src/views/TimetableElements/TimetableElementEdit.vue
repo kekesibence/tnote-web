@@ -1,6 +1,6 @@
 <template>
     <div class="noteAdd" v-if="isLoggedIn">
-        <h1 class="flex justify-center pt-16 text-xl w-full font-bold">Create new note</h1>
+        <h1 class="flex justify-center pt-16 text-xl w-full font-bold">Edit timetable element</h1>
             <div class="w-7/12 mx-auto">
                 <div class="shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border-1 border-black/50 mt-4">
                     <main class="form">

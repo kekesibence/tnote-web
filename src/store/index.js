@@ -6,16 +6,15 @@ const store = createStore({
   state: {
     user: null,
     token: null,
+    note: null,
     noteList: [],
-    note: {
-      id: null,
-      content: null,
-      ownerId: null,
-      title: null,
-      updated_at: null,
-    },
+    timetable: null,
+    timetableList: [],
+    timetableElement: null,
+    timetableElementList: [],
     isAuthenticated: false,
-    activeNote: null
+    activeNote: null,
+    activeTimetable: null,
   },
   mutations: {
     setUser(state, payload) {
@@ -30,9 +29,21 @@ const store = createStore({
     fillNoteList(state, payload) {
       state.noteList = payload
     },
+    fillTimetableList(state, payload) {
+      state.timetableList = payload
+    },
+    fillTimetableElementsList(state, payload) {
+      state.timetableElementList = payload
+    },
     setActiveNote(state, payload) {
       state.activeNote = payload
-    }
+    },
+    setActiveTimetable(state, payload) {
+      state.activeTimetable = payload
+    },
+    setActiveTimetableElement(state, payload) {
+      state.activeTimetableElement = payload
+    },
   },
   actions: {
     async register(context, { name, email, password } ) {
@@ -62,15 +73,13 @@ const store = createStore({
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
       const response  = await axios.get(`users/${this.getters.getUser.id}/notes`)
       context.commit("fillNoteList", response.data)
+      console.log(response.data)
     },
     async addNote(context, {title, content, ownerId }) {
       console.log('addNote');
       console.log(content, ownerId, title)
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
       await axios.post('notes', { content, ownerId, title}, {withCredentials: true, });
-    },
-    async setActiveNote(context, note) {
-      context.commit("setActiveNote", note)
     },
     async editNote(context, {title, ownerId, content }){
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
@@ -80,14 +89,36 @@ const store = createStore({
     async deleteNote(context, id) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
       await axios.delete(`notes/${id}`, {withCredentials: true, });
-    }
+    },
+    async setActiveNote(context, note) {
+      context.commit("setActiveNote", note)
+    },
+    async getTimetables(context) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      const response  = await axios.get(`users/${this.getters.getUser.id}/timetables`)
+      context.commit("fillTimetableList", response.data)
+    },
+    async setActiveTimetable(context, timetable) {
+      context.commit("setActiveTimetable", timetable)
+    },
+    async getTimetableElements(context) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      const id = this.getters.getActiveTimetable.id
+      const response  = await axios.get(`timetables/${id}/selectedtimetable`)
+      context.commit("fillTimetableElementsList", response.data)
+    },
+    
   },
   getters: {
     isAuthenticated: state => !!state.user,
     getUser: (state) => state.user,
     getToken: (state) => state.token,
     getNoteList: (state) => state.noteList,
-    getActiveNote: (state) => state.activeNote
+    getActiveNote: (state) => state.activeNote,
+    getTimetableList: (state) => state.timetableList,
+    getActiveTimetable: (state) => state.activeTimetable,
+    getTimetableElementList: (state) => state.timetableElementList,
+    getActiveTimetableElement: (state) => state.activeTimetableElement,
   }
 })
 
