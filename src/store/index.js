@@ -15,6 +15,7 @@ const store = createStore({
     isAuthenticated: false,
     activeNote: null,
     activeTimetable: null,
+    acttiveTimetableElement: null, 
   },
   mutations: {
     setUser(state, payload) {
@@ -47,7 +48,6 @@ const store = createStore({
   },
   actions: {
     async register(context, { name, email, password } ) {
-
         const { data } = await axios.post("register", { name, email, password });
         if(data) {
           context.commit('setUser', data.user)
@@ -56,7 +56,6 @@ const store = createStore({
     async login(context, { email, password } ) {
       const { data } = await axios.post("login", { email, password }, { withCredentials: true, });
       axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
-      console.log(data.user)
       if(data) {
         context.commit('setUser', data.user)
         context.commit('setToken', data.token)
@@ -73,11 +72,8 @@ const store = createStore({
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
       const response  = await axios.get(`users/${this.getters.getUser.id}/notes`)
       context.commit("fillNoteList", response.data)
-      console.log(response.data)
     },
     async addNote(context, {title, content, ownerId }) {
-      console.log('addNote');
-      console.log(content, ownerId, title)
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
       await axios.post('notes', { content, ownerId, title}, {withCredentials: true, });
     },
@@ -103,9 +99,15 @@ const store = createStore({
     },
     async getTimetableElements(context) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
-      const id = this.getters.getActiveTimetable.id
-      const response  = await axios.get(`timetables/${id}/selectedtimetable`)
+      const response  = await axios.get(`timetables/${this.getters.getActiveTimetable.id}/selectedtimetable`)
       context.commit("fillTimetableElementsList", response.data)
+    },
+    async setActiveTimetableElement(context, element) {
+      context.commit("setActiveTimetableElement", element)
+    },
+    async deleteTimetableElement(context, id) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      await axios.delete(`ttelements/${id}`, {withCredentials: true, });
     },
     
   },

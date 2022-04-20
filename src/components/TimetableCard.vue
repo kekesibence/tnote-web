@@ -1,6 +1,6 @@
 <template>
     <div v-for="timetable in timetables" v-bind:key="timetable.id" class="bg-darkPurple hover:bg-purple-800 text-white hover:no-underline p-3 grid grid-cols-1 content-between rounded-xl h-80">
-        <div class="max-w-sm rounded">
+        <div class="w-full rounded">
             <div class="kartyaCim font-semibold text-lg rounded-xl  bg-orange p-2 text-center">{{ timetable.name }}</div>
             <div class="mt-6 p-2 text-gray-300 text-sm line-clamp-2">vmi</div>
         </div>

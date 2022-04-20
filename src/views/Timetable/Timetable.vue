@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoggedIn">
-        <h1 class="flex justify-center pt-16 text-xl w-full font-bold">{{ user.name }}'s timetable</h1>
+        <h1 class="flex justify-center pt-16 text-xl w-full font-bold">{{ user.name }}'s timetables</h1>
         <div class="py-10 px-10 mx-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:mid-cols-3 gap-10">
             <TimetableCard/>   
         </div>

@@ -1,0 +1,59 @@
+<template>
+    <div class="noteAdd" v-if="isLoggedIn">
+            <div class="w-7/12 pt-16 mx-auto">
+                <div class="shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border-1 border-black/50 mt-4">
+                    <h2 class="text-2xl text-center font-bold pb-6">{{ element.title }}</h2> 
+                    <p class="text-sm tracking-wider text-orange">Day:</p>   
+                    <p class="text-md">{{ element.day }}</p>
+                    <p class="text-sm tracking-wider text-orange">Description:</p>   
+                    <p class="text-md">{{ element.description }}</p>
+                    <p class="text-sm tracking-wider text-orange">Start:</p>   
+                    <p class="text-md">{{ element.start }}</p>
+                    <p class="text-sm tracking-wider text-orange">End:</p>   
+                    <p class="text-md">{{ element.end }}</p>
+                    <p class="text-sm tracking-wider text-orange">Repeating:</p>   
+                    <p class="text-md">{{ element.repeating }}</p>
+                </div>
+                <div class="flex items-center justify-between">
+                    <router-link to="/timetableelementedit" class=" bg-orange font-bold rounded hover:no-underline text-white py-2 px-4">Edit</router-link>
+                    <button  @click="deleteElement" class=" bg-orange font-bold rounded hover:no-underline text-white py-2 px-4">Delete</button>
+                </div>
+         </div>
+    </div>
+    <div v-else>
+        <NotLoggedIn/>
+    </div>
+</template>
+<script>
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { computed, ref } from "vue";
+import NotLoggedIn from "../../components/NotLoggedIn.vue"
+
+
+export default {
+  name: "Notes",
+  components: {
+      NotLoggedIn
+  },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+
+    const deleteElement = async(e) => {
+            const id = store.getters.getActiveTimetableElement.id
+            try {
+                await store.dispatch('deleteTimetableElement', id)
+                router.push('/timetableview')
+            } catch(err) {
+                console.log(err)
+            }   
+        }
+    return {
+        deleteElement,
+        isLoggedIn: computed(() => store.getters.isAuthenticated),
+        element: computed(() => store.getters.getActiveTimetableElement)  
+    };
+  },
+};
+</script>
