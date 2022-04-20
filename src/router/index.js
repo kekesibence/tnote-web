@@ -57,7 +57,7 @@ const routes = [
   },
   {
     path: '/timetable',
-    name: 'user',
+    name: 'timetable',
     component: Timetable
   },
   {
