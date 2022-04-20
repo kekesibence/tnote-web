@@ -121,6 +121,9 @@ const store = createStore({
     getActiveTimetable: (state) => state.activeTimetable,
     getTimetableElementList: (state) => state.timetableElementList,
     getActiveTimetableElement: (state) => state.activeTimetableElement,
+    getElementByDay: (state) => (day) => {
+        return state.timetableElementList.filter(element => element.day == day)
+    }
   }
 })
 

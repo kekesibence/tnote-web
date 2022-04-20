@@ -77,7 +77,7 @@ export default {
       }
       
     }
-    return { submit, name, email, password, error }
+    return { submit, name, email, password, passwordAgain, error }
   }
 }
 </script>

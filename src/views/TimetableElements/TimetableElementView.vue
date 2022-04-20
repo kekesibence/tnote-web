@@ -40,6 +40,9 @@ export default {
     const store = useStore();
     const router = useRouter();
 
+    const mondayList = store.getters.getElementByDay("Monday")
+    console.log(mondayList)
+
     const deleteElement = async(e) => {
             const id = store.getters.getActiveTimetableElement.id
             try {
