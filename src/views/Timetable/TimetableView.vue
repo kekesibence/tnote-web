@@ -129,17 +129,23 @@ export default {
     const store = useStore();
     const router = useRouter(); 
     
+    function setActiveTimetableElement(element) {
+      store.dispatch('setActiveTimetableElement', element)
+      router.push("/timetableelementview")
+    }
+
     return {
         isLoggedIn: computed(() => store.getters.isAuthenticated),
         element: computed(() => store.getters.getActiveTimetable), 
+        getnotes: store.dispatch('getTimetableElements'),
         mondayList: computed(() => store.getters.getElementByDay("Monday")),
         tuesdayList: computed(() => store.getters.getElementByDay("Tuesday")),
         wednesdayList: computed(() => store.getters.getElementByDay("Wednesday")),
         thursdayList: computed(() => store.getters.getElementByDay("Thursday")),
         fridayList: computed(() => store.getters.getElementByDay("Friday")),
         saturdayList: computed(() => store.getters.getElementByDay("Saturday")),
-        sundayList: computed(() => store.getters.getElementByDay("Sunday"))
-
+        sundayList: computed(() => store.getters.getElementByDay("Sunday")),
+        setActiveTimetableElement   
     };
   },
 };

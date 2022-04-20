@@ -12,7 +12,15 @@
 
                         <div class="mb-4">
                             <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="email">Element day</label>
-                            <input class="input shadow appearance-none border rounded-full w-full py-2 px-3 text-black"  type="text" placeholder="Monday" v-model="day" required>
+                            <select id="days" name="days" class="input shadow appearance-none border rounded-full w-full py-2 px-3 text-black" placeholder="Monday" v-model="day" required>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>                                
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
                         </div>
 
                         <div class="mb-4">
@@ -22,19 +30,28 @@
 
                         <div class="mb-6">
                             <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="passwordAgain">Element start</label>
-
-                            <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 text-black mb-3" type="time" step="1" placeholder="HH:MM:SS" v-model="start" required>
+                            
+                            <div class="input shadow appearance-none border border-red rounded-full w-full py-0 px-3 text-black mb-3 bg-white">
+                                <label class="block bg-white text-black text-sm font-bold my-2">
+                                    <input placeholder="12" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="23" v-model="startHours"> Hours 
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="startMinutes"> Minutes
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="startSeconds"> Second</label>
+                            </div>
                         </div>
 
                         <div class="mb-6">
                             <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="passwordAgain">Element end</label>
 
-                            <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 text-black mb-3" type="time" step="1" placeholder="HH:MM:SS" v-model="end" required>
+                            <div class="input shadow appearance-none border border-red rounded-full w-full py-0 px-3 text-black mb-3 bg-white">
+                                <label class="block bg-white text-black text-sm font-bold my-2">
+                                    <input placeholder="12" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="23" v-model="endHours"> Hours 
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="endMinutes"> Minutes
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="endSeconds"> Second</label>
+                            </div>
                         </div>
 
                         <div class="mb-6">
-                            <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="passwordAgain">Element repeating</label>
-                            <input type="checkbox" name="" id="" v-model="repeating" >
+                            <label class="block text-grey-darker text-center text-sm font-bold my-2" for="passwordAgain">Element repeating <input type="checkbox" class="" v-model="repeating"></label>
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -68,8 +85,12 @@ export default {
     const title = ref('')
     const day = ref('')
     const description = ref('')
-    const start = ref('')
-    const end = ref('')
+    const startHours = ref('')
+    const startMinutes = ref('')
+    const startSeconds = ref('')  
+    const endHours = ref('')
+    const endMinutes = ref('')
+    const endSeconds = ref('')
     const repeating = ref('')
 
     const error = ref('')
@@ -83,8 +104,8 @@ export default {
             title: title.value,
             day: day.value,
             description: description.value,
-            start: start.value,
-            end: end.value,
+            start: startHours.value + ":" + startMinutes.value + ":" + startSeconds.value,
+            end: endHours.value + ":" + endMinutes.value + ":" + endSeconds.value,
             repeating: repeating.value,
         })
         router.push('/timetableview')
@@ -108,7 +129,16 @@ export default {
       isLoggedIn: computed(() => store.getters.isAuthenticated),
       getnotes: store.dispatch('getNotes'),
       notes: computed(() => store.getters.getNoteList),
-      title, day, description, start, end, repeating,
+      title, 
+      day, 
+      description, 
+      startHours,
+      startMinutes,
+      startSeconds, 
+      endHours,
+      endMinutes,
+      endSeconds, 
+      repeating,
     };
   },
 };

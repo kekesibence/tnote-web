@@ -1,25 +1,66 @@
 <template>
-    <div class="noteAdd" v-if="isLoggedIn">
-        <h1 class="flex justify-center pt-16 text-xl w-full font-bold">Edit timetable element</h1>
+    <div class="elementAdd" v-if="isLoggedIn">
+        <h1 class="flex justify-center pt-16 text-xl w-full font-bold">Create new timetable element</h1>
             <div class="w-7/12 mx-auto">
                 <div class="shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border-1 border-black/50 mt-4">
-                    <main class="form">
+                    <main class="form-login">
                         <form @submit.prevent="submit">
-                            <div class="mb-4">
-                                <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="title">Note title</label>
-                                <input  class="input shadow appearance-none border rounded-full w-full py-2 px-3 text-black"  id="title" type="text" placeholder="Title" v-model="title" required>
+                        <div class="mb-4">
+                            <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="name">Element title:</label>
+                            <input class="input shadow appearance-none border rounded-full w-full py-2 px-3 text-black"  type="text" placeholder="Title" v-model="title" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="email">Element day</label>
+                            <select id="days" name="days" class="input shadow appearance-none border rounded-full w-full py-2 px-3 text-black" placeholder="Monday" v-model="day" required>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>                                
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="password">Element description</label>
+                            <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 text-black mb-3"  type="text" placeholder="Descriptsion.." v-model="description" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="passwordAgain">Element start</label>
+                            
+                            <div class="input shadow appearance-none border border-red rounded-full w-full py-0 px-3 text-black mb-3 bg-white">
+                                <label class="block bg-white text-black text-sm font-bold my-2">
+                                    <input placeholder="12" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="23" v-model="startHours"> Hours 
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="startMinutes"> Minutes
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="startSeconds"> Second</label>
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="content">Note content</label>
-                                <textarea class="form-control block w-full x-3 p-3 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded ransition  m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="content" rows="5" placeholder="Your text"  v-model="content" required></textarea>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-grey-darker text-center text-sm font-bold mb-2" for="passwordAgain">Element end</label>
+
+                            <div class="input shadow appearance-none border border-red rounded-full w-full py-0 px-3 text-black mb-3 bg-white">
+                                <label class="block bg-white text-black text-sm font-bold my-2">
+                                    <input placeholder="12" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="23" v-model="endHours"> Hours 
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="endMinutes"> Minutes
+                                    <input placeholder="00" class="text-black text-center border-1 rounded mx-1" type="number" min="0" max="59" v-model="endSeconds"> Second</label>
                             </div>
-                            <div class="flex items-center justify-between">
-                                <button class="bg-orange font-bold rounded text-white py-2 px-4">Submit</button>
-                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-grey-darker text-center text-sm font-bold my-2" for="passwordAgain">Element repeating <input type="checkbox" class="" v-model="repeating"></label>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <button class="submitBtn bg-orange font-bold rounded text-white  py-2 px-4">submit</button>
+                        </div>
                         </form>
                     </main>
                 </div>
-            </div>
+         </div>
     </div>
     <div v-else>
         <NotLoggedIn/>
@@ -28,46 +69,96 @@
 <script>
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import NotLoggedIn from "../../components/NotLoggedIn.vue"
 
-export default {
-    name: "Notes",
-    components: {
-        NotLoggedIn
-    },
-    data() {
-        const store = useStore();
-    
-        let respone = computed(() => store.getters.getActiveNote)
-        const note = respone.value
-        return {
-            title: note.title,
-	        content: note.content,
-        }
-    },
-    setup() {
-        const store = useStore();
-        const router = useRouter();
 
-        const submit = async(e) => {
-            console.log("edit")
-            try {
-                await store.dispatch('editNote', {
-                title: document.getElementById("title").value,
-                content: document.getElementById("content").value,
-                ownerId: store.getters.getUser.id,
-                })
-                router.push('/notes')
-            } catch(err) {
-                console.log(err)
-            }   
-        }
-        return {
-        submit,
-        isLoggedIn: computed(() => store.getters.isAuthenticated),
-        note: computed(() => store.getters.getActiveNote),
-        };
+export default {
+  name: "TimetableElements",
+  components: {
+      NotLoggedIn
+  },
+  setup() {
+    const store = useStore();
+    const router = useRouter();
+
+    const title = ref('')
+    const day = ref('')
+    const description = ref('')
+    const startHours = ref('')
+    const startMinutes = ref('')
+    const startSeconds = ref('')  
+    const endHours = ref('')
+    const endMinutes = ref('')
+    const endSeconds = ref('')
+    const repeating = ref('')
+
+    const error = ref('')
+
+    onMounted(() => {
+        const respone = computed(() => store.getters.getActiveTimetableElement)
+        const element = respone.value
+        title.value = element.title
+        description.value = element.description
+        day.value = element.day
+
+        let dataStart = element.start.split(":")
+        startHours.value = dataStart[0]
+        startMinutes.value = dataStart[1]
+        startSeconds.value = dataStart[2]
+
+        let dataEnd = element.end.split(":")
+        endHours.value = dataEnd[0]
+        endMinutes.value = dataEnd[1]
+        endSeconds.value = dataEnd[2]
+
+        repeating.value = element.repeating
+    })
+
+    const submit = async(e) => {    
+    try {
+        console.log("edit")  
+        await store.dispatch('editTimetableElement', {
+            title: title.value,
+            day: day.value,
+            description: description.value,
+            start: startHours.value + ":" + startMinutes.value + ":" + startSeconds.value,
+            end: endHours.value + ":" + endMinutes.value + ":" + endSeconds.value,
+            repeating: repeating.value,
+        })
+        router.push('/timetableview')
+      } catch(err) {
+        error.value = err.value
+      }
+     /* try {
+        await store.dispatch('addNote', {
+          title: document.getElementById("title").value,
+          content: document.getElementById("content").value,
+          ownerId: store.getters.getUser.id,
+        })
+        router.push('/notes')
+      } catch(err) {
+      }
+      */
+    }
+    return {
+      submit,
+      user: computed(() => store.getters.getUser),
+      isLoggedIn: computed(() => store.getters.isAuthenticated),
+      getnotes: store.dispatch('getNotes'),
+      notes: computed(() => store.getters.getNoteList),
+      title, 
+      day, 
+      description, 
+      startHours,
+      startMinutes,
+      startSeconds, 
+      endHours,
+      endMinutes,
+      endSeconds, 
+      repeating,
+    };
   },
 };
 </script>
+

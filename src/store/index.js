@@ -109,6 +109,19 @@ const store = createStore({
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
       await axios.delete(`ttelements/${id}`, {withCredentials: true, });
     },
+    async setActiveTimetableElement(context, element) {
+      context.commit("setActiveTimetableElement", element)
+    },
+    async addTimetableElement(context, {title, day, description, start, end, repeating }) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      let ttid = this.getters.getActiveTimetable.id
+      await axios.post('ttelements', { ttid ,title, day, description, start, end, repeating}, {withCredentials: true, });
+    },
+    async editTimetableElement(context, {title, day, description, start, end, repeating }) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
+      let ttid = this.getters.getActiveTimetable.id
+      await axios.patch(`ttelements/${this.getters.getActiveTimetableElement.id}`, { ttid ,title, day, description, start, end, repeating}, {withCredentials: true, });
+    },
     
   },
   getters: {
