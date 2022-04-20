@@ -20,10 +20,6 @@
       </div>
       <div class="flex items-center justify-between">
         <button class="submitBtn bg-orange font-bold rounded text-white  py-2 px-4">Submit</button>
-
-        <router-link to="" class="inline-block align-baseline font-semibold hover:text-orange hover:no-underline text-sm" >
-          Forgot Password?
-        </router-link>
       </div>
     </form>
     </main>
