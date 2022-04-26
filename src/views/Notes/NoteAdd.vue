@@ -50,6 +50,7 @@ export default {
     const content = ref('')
     
     const submit = async(e) => {
+    console.log("vmi")
       try {
         await store.dispatch('addNote', {
           title: document.getElementById("title").value,
@@ -62,7 +63,7 @@ export default {
       
     }
     return {
-      submit,
+      submit, title, content,
       user: computed(() => store.getters.getUser),
       isLoggedIn: computed(() => store.getters.isAuthenticated),
       getnotes: store.dispatch('getNotes'),

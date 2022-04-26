@@ -51,6 +51,7 @@ const store = createStore({
         const { data } = await axios.post("register", { name, email, password });
         if(data) {
           context.commit('setUser', data.user)
+          context.commit('setToken', data.token)
         }
     },
     async login(context, { email, password } ) {

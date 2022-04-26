@@ -35,6 +35,7 @@
         </label>
         <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 text-black mb-3"  type="password" placeholder="***********" v-model="passwordAgain" required>
         <label class="block text-red-700 text-center text-sm font-bold mt-2" v-show="passwordAgainError">Password must match</label>
+        <label class="block text-red-700 text-center text-md font-bold mt-2" v-show="passwordAgainError">The username or e-mail address already used</label>
       </div>
 
       <div class="flex items-center justify-between">
@@ -63,6 +64,7 @@ export default {
       emailError: false,
       passwordError: false,
       passwordAgainError: false,
+      foglaltError: false,
       router: useRouter(),
       store: useStore()
     }
@@ -99,6 +101,7 @@ export default {
           })
           this.$router.push('/')
           } catch(err) {
+              this.foglaltError = true
               console.log(err)
           }
         }
