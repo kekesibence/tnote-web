@@ -62,7 +62,6 @@ const store = createStore({
       }
     },
     async logout(context) {
-
       const user = null;
       const token = null;
       context.commit("setUser", user);
@@ -108,9 +107,6 @@ const store = createStore({
     async deleteTimetableElement(context, id) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;
       await axios.delete(`ttelements/${id}`, {withCredentials: true, });
-    },
-    async setActiveTimetableElement(context, element) {
-      context.commit("setActiveTimetableElement", element)
     },
     async addTimetableElement(context, {title, day, description, start, end, repeating }) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${this.getters.getToken}`;

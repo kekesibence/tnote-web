@@ -17,6 +17,7 @@
           Password
         </label>
         <input class="input shadow appearance-none border border-red rounded-full w-full py-2 px-3 text-black mb-3"  type="password" placeholder="***********" v-model="password" required>
+        <label class="block text-red-700 text-center text-sm font-bold mt-0" v-show="error">E-mail or password incorrect</label>
       </div>
       <div class="flex items-center justify-between">
         <button class="submitBtn bg-orange font-bold rounded text-white  py-2 px-4">Submit</button>
@@ -29,32 +30,31 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 export default {
-   setup() {
-    const email = ref('')
-    const password = ref('')
-    const error = ref(null);
-
-    const router = useRouter()
-    const store = useStore()
-
-    const submit = async(e) => {
-      try {
-        await store.dispatch('login', {
-          email: email.value,
-          password: password.value
-        })
-        router.push('/')
-      } catch(err) {
-        error.value = err.value
-      }
-      
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: false,
+      router: useRouter(),
+      store: useStore()
     }
-    return { submit, email, password, error }
+  },
+  methods: {
+    async submit(e) { 
+        try {
+          await this.$store.dispatch('login', {
+            email: this.email,
+            password: this.password
+          })
+          this.$router.push('/')
+          } catch(err) {
+            this.error = true
+          }
+        }
+    }
   }
-}
 </script>
